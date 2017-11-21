@@ -7,6 +7,7 @@
   "generator-videojs-plugin": {
     "version": "5.0.3"
   },
+  "repository": "https://github.com/chrisboustead/videojs-hls-quality-selector.git",
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npm-run-all -p build:*",
