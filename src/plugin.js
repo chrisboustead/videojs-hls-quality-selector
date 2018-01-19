@@ -74,7 +74,7 @@ class hlsQualitySelectorPlugin {
     const concreteButtonClass = videojs.extend(videoJsButtonClass, {
 
       constructor: function() {
-        videoJsButtonClass.call(this, player, {title : 'Quality'});
+        videoJsButtonClass.call(this, player, {title : player.localize('Quality')});
       },
       createItems : function() {
         return [];
