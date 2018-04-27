@@ -54,15 +54,28 @@ class HlsQualitySelectorPlugin {
 
     const player = this.player;
     const videoJsButtonClass = videojs.getComponent('MenuButton');
-    const ConcreteButtonClass = videojs.extend(videoJsButtonClass, {
 
-      constructor: () => {
-        videoJsButtonClass.call(this, player, {title: player.localize('Quality')});
-      },
-      createItems: () => {
+    /**
+     * Extend vjs button class for quality button.
+     */
+    class ConcreteButtonClass extends videoJsButtonClass {
+
+      /**
+       * Button constructor.
+       */
+      constructor() {
+        super(player, {title: player.localize('Quality')});
+      }
+
+      /**
+       * Creates button items.
+       *
+       * @return {Array} - Button items
+       */
+      createItems() {
         return [];
       }
-    });
+    }
 
     this._qualityButton = new ConcreteButtonClass();
 
@@ -87,29 +100,49 @@ class HlsQualitySelectorPlugin {
   getQualityMenuItem(item) {
     const player = this.player;
     const videoJsMenuItemClass = videojs.getComponent('MenuItem');
-    const ConcreteMenuItemClass = videojs.extend(videoJsMenuItemClass, {
-      constructor: () => {
-        videoJsMenuItemClass.call(this, player, {
+
+    /**
+     * Extend vjs menu item class.
+     */
+    class ConcreteMenuItemClass extends videoJsMenuItemClass {
+
+      /**
+       * Menu item constructor.
+       *
+       * @param {Player} _player - vjs player
+       * @param {Object} _item - Item object
+       * @param {ConcreteButtonClass} qualityButton - The containing button.
+       * @param {HlsQualitySelectorPlugin} _plugin - This plugin instance.
+       */
+      constructor(_player, _item, qualityButton, _plugin) {
+        super(_player, {
           label: item.label,
           selectable: true,
           selected: item.selected || false
         });
-      },
-      handleClick: () => {
+        this.item = _item;
+        this.qualityButton = qualityButton;
+        this.plugin = _plugin;
+      }
+
+      /**
+       * Click event for menu item.
+       */
+      handleClick() {
 
         // Reset other menu items selected status.
-        for (let i = 0; i < this._qualityButton.items.length; ++i) {
-          this._qualityButton.items[i].selected(false);
+        for (let i = 0; i < this.qualityButton.items.length; ++i) {
+          this.qualityButton.items[i].selected(false);
         }
 
         // Set this menu item to selected, and set quality.
-        this.setQuality(item.value);
+        this.plugin.setQuality(this.item.value);
         this.selected(true);
 
       }
-    });
+    }
 
-    return new ConcreteMenuItemClass();
+    return new ConcreteMenuItemClass(player, item, this._qualityButton, this);
   }
 
   /**
