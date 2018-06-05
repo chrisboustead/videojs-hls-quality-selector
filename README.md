@@ -4,8 +4,18 @@ Adds a quality selector menu for HLS sources played in videojs.  Requires `video
 
 ## Table of Contents
 
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Installation
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [`<script>` Tag](#script-tag)
+  - [Browserify/CommonJS](#browserifycommonjs)
+  - [RequireJS/AMD](#requirejsamd)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ## Installation
 
 ```sh

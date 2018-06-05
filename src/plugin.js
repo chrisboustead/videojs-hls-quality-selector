@@ -156,12 +156,16 @@ class HlsQualitySelectorPlugin {
     const levelItems = [];
 
     for (let i = 0; i < levels.length; ++i) {
-      const levelItem = this.getQualityMenuItem.call(this, {
-        label: levels[i].height + 'p',
-        value: levels[i].height
-      });
+      if (!levelItems.filter(_existingItem => {
+        return _existingItem.value === levels[i].height;
+      }).length) {
+        const levelItem = this.getQualityMenuItem.call(this, {
+          label: levels[i].height + 'p',
+          value: levels[i].height
+        });
 
-      levelItems.push(levelItem);
+        levelItems.push(levelItem);
+      }
     }
 
     levelItems.push(this.getQualityMenuItem.call(this, {
