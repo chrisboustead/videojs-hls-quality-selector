@@ -157,7 +157,7 @@ class HlsQualitySelectorPlugin {
 
     for (let i = 0; i < levels.length; ++i) {
       if (!levelItems.filter(_existingItem => {
-        return _existingItem.value === levels[i].height;
+        return _existingItem.item && _existingItem.item.value === levels[i].height;
       }).length) {
         const levelItem = this.getQualityMenuItem.call(this, {
           label: levels[i].height + 'p',
