@@ -168,8 +168,21 @@ class HlsQualitySelectorPlugin {
       }
     }
 
+    levelItems.sort((current, next) => {
+      if ((typeof current !== 'object') || (typeof next !== 'object')) {
+        return -1;
+      }
+      if (current.item.value < next.item.value) {
+        return -1;
+      }
+      if (current.item.value > next.item.value) {
+        return 1;
+      }
+      return 0;
+    });
+
     levelItems.push(this.getQualityMenuItem.call(this, {
-      label: 'Auto',
+      label: player.localize('Auto'),
       value: 'auto',
       selected: true
     }));
