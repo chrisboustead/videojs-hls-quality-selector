@@ -68,7 +68,7 @@
   "dependencies": {
     "global": "^4.3.2",
     "karma-safaritechpreview-launcher": "0.0.6",
-    "video.js": "^5.19.2 || ^6.2.0",
+    "video.js": "^5.19.2 || ^6.2.0 || ^7.2.0",
     "videojs-contrib-hls": "^5.12.2",
     "videojs-contrib-quality-levels": "^2.0.3"
   },
