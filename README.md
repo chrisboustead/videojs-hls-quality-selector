@@ -2,7 +2,20 @@
 [![CircleCI](https://circleci.com/gh/chrisboustead/videojs-hls-quality-selector/tree/master.svg?style=svg)](https://circleci.com/gh/chrisboustead/videojs-hls-quality-selector/tree/master)
 [![npm version](https://badge.fury.io/js/videojs-hls-quality-selector.svg)](https://badge.fury.io/js/videojs-hls-quality-selector)
 
-Adds a quality selector menu for HLS sources played in videojs.  Requires `videojs-contrib-hls` and videojs-contrib-quality-levels plugins.
+**Note:** v1.x.x is Only compatible with VideoJS 7.x due to the move from `videojs-contrib-hls` to `videojs/http-streaming`.  For VideoJS v5 or v6 support please use a `v0.x.x` tag.
+
+## Description
+
+Adds a quality selector menu for HLS sources played in videojs.  
+Requires `videojs-contrib-quality-levels` plugins.
+
+Any HLS manifest with multiple playlists/renditions should be selectable from within the added control.  
+
+**Native HLS**
+
+Does not yet support browsers using native HLS (Safari, Edge, etc).  To enable plugin in browsers with native HLS, you must force non-native HLS playback:
+
+![Example](example.png)
 
 ## Table of Contents
 
