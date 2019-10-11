@@ -21,7 +21,9 @@
   <script>
     (function(window, videojs) {
       var player = window.player = videojs('videojs-hls-quality-selector-player');
-      player.hlsQualitySelector();
+      player.hlsQualitySelector({
+          displayCurrentQuality: true,
+      });
     }(window, window.videojs));
   </script>
 </body>
