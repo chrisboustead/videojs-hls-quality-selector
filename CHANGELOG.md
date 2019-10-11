@@ -1,3 +1,10 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.0.5...v1.1.0) (2019-10-11)
+
+### Features
+
+* **config:** display resolutions in menu button ([d285eef](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/d285eef))
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v0.0.7...v0.0.8) (2018-06-27)
 
