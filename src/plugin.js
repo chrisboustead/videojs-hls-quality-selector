@@ -23,6 +23,7 @@ class HlsQualitySelectorPlugin {
    */
   constructor(player, options) {
     this.player = player;
+    this.config = options;
 
     // If there is quality levels plugin and the HLS tech exists
     // then continue.
@@ -64,10 +65,24 @@ class HlsQualitySelectorPlugin {
       placementIndex);
 
     concreteButtonInstance.addClass('vjs-quality-selector');
-    concreteButtonInstance
-      .menuButton_.$('.vjs-icon-placeholder').className += ' vjs-icon-hd';
+    if (!this.config.displayCurrentQuality) {
+      concreteButtonInstance
+        .menuButton_.$('.vjs-icon-placeholder').className += ' vjs-icon-hd';
+    } else {
+      this.setButtonInnerText('auto');
+    }
     concreteButtonInstance.removeClass('vjs-hidden');
 
+  }
+
+  /**
+   *Set inner button text.
+   *
+   * @param {string} text - the text to display in the button.
+   */
+  setButtonInnerText(text) {
+    this._qualityButton
+      .menuButton_.$('.vjs-icon-placeholder').innerHTML = text;
   }
 
   /**
@@ -140,6 +155,10 @@ class HlsQualitySelectorPlugin {
    */
   setQuality(height) {
     const qualityList = this.player.qualityLevels();
+
+    if (this.config.displayCurrentQuality) {
+      this.setButtonInnerText(height === 'auto' ? height : `${height}p`);
+    }
 
     for (let i = 0; i < qualityList.length; ++i) {
       const quality = qualityList[i];

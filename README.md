@@ -15,7 +15,20 @@ Any HLS manifest with multiple playlists/renditions should be selectable from wi
 
 Does not yet support browsers using native HLS (Safari, Edge, etc).  To enable plugin in browsers with native HLS, you must force non-native HLS playback:
 
+## Options
+
+**displayCurrentQuality** `boolean` - _false_
+
+Set to true to display the currently selected resolution in the menu button.  When not enabled, displayed an included VJS "HD" icon.
+
+## Screenshots
+
+Default setup - Menu selected:
 ![Example](example.png)
+
+
+Display Current Quality option enabled:
+![Example](example-2.png)
 
 ## Table of Contents
 
@@ -69,7 +82,9 @@ require('videojs-hls-quality-selector');
 
 var player = videojs('my-video');
 
-player.hlsQualitySelector();
+player.hlsQualitySelector({
+    displayCurrentQuality: true,
+});
 ```
 
 ### RequireJS/AMD
@@ -80,7 +95,9 @@ When using with RequireJS (or another AMD library), get the script in whatever w
 require(['video.js', 'videojs-hls-quality-selector'], function(videojs) {
   var player = videojs('my-video');
 
-  player.hlsQualitySelector();
+  player.hlsQualitySelector({
+       displayCurrentQuality: true,
+    });
 });
 ```
 
