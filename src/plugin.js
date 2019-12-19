@@ -62,7 +62,7 @@ class HlsQualitySelectorPlugin {
     const placementIndex = player.controlBar.children().length - 2;
     const concreteButtonInstance = player.controlBar.addChild(this._qualityButton,
       {componentClass: 'qualitySelector'},
-      placementIndex);
+      this.config.placementIndex || placementIndex);
 
     concreteButtonInstance.addClass('vjs-quality-selector');
     if (!this.config.displayCurrentQuality) {
