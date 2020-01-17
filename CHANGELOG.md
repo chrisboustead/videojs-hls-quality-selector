@@ -1,3 +1,15 @@
+<a name="1.1.1"></a>
+## [1.1.1](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.0...v1.1.1) (2020-01-17)
+
+### Bug Fixes
+
+* **deps:** bump dependencies ([4980678](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/4980678))
+* **plugin:** fix merged code lint issues ([dba70d5](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/dba70d5))
+
+### Chores
+
+* **deps:** bump lodash.template from 4.4.0 to 4.5.0 ([b559126](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/b559126))
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.0.5...v1.1.0) (2019-10-11)
 
