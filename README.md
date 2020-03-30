@@ -60,6 +60,7 @@ This is the simplest case. Get the script in whatever way you prefer and include
 
 ```html
 <script src="//path/to/video.min.js"></script>
+<script src="//path/to/videojs-contrib-quality-levels.min.js"></script>
 <script src="//path/to/videojs-hls-quality-selector.min.js"></script>
 <script>
   var player = videojs('my-video');
