@@ -21,6 +21,14 @@ Does not yet support browsers using native HLS (Safari, Edge, etc).  To enable p
 
 Set to true to display the currently selected resolution in the menu button.  When not enabled, displayed an included VJS "HD" icon.
 
+**placementIndex** `integer`
+
+Set this to override the default positioning of the menu button in the control bar relative to the other components in the control bar.
+
+**vjsIconClass** `string` - _"vjs-icon-hd"_
+
+Set this to one of the custom VJS icons ([https://videojs.github.io/font/](https://videojs.github.io/font/)) to override the icon for the menu button. 
+
 ## Screenshots
 
 Default setup - Menu selected:
