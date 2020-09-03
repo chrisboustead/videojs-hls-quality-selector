@@ -40,7 +40,8 @@
     "watch:test": "rollup -c scripts/test.rollup.config.js -w",
     "prepublish": "npm run build",
     "prepush": "npm run lint",
-    "precommit": "npm run docs:toc && git add README.md"
+    "precommit": "npm run docs:toc && git add README.md",
+    "preinstall": "npx npm-force-resolutions"
   },
   "keywords": [
     "videojs",
@@ -89,7 +90,7 @@
     "karma-qunit": "^1.2.1",
     "karma-safari-launcher": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "node-static": "^0.7.9",
     "npm-run-all": "^4.0.2",
     "qunitjs": "^2.3.2",
@@ -105,5 +106,8 @@
     "sinon": "^2.2.0",
     "uglify-js": "^3.0.7",
     "videojs-standard": "^6.0.0"
+  },
+  "resolutions": {
+    "dot-prop": "4.2.1"
   }
 }
