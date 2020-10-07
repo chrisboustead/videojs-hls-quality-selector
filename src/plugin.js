@@ -174,8 +174,9 @@ class HlsQualitySelectorPlugin {
   }
 
   /**
-   * Return the current set quality or 'auto';
-   * @returns {string} the currently set quality
+   * Return the current set quality or 'auto'
+   *
+   * @return {string} the currently set quality
    */
   getCurrentQuality() {
     return this._currentQuality || 'auto';
