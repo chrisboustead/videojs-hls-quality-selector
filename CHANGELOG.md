@@ -1,3 +1,11 @@
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.2...v1.1.3) (2020-10-07)
+
+### Bug Fixes
+
+* **docs:** documentation formatting ([80d7bb3](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/80d7bb3))
+* **plugin:** add a quality getter ([13b8be9](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/13b8be9))
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.1...v1.1.2) (2020-09-03)
 
