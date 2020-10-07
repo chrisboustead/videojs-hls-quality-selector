@@ -1,3 +1,10 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.3...v1.1.4) (2020-10-07)
+
+### Bug Fixes
+
+* **npm:** remove force resolutions ([ab34990](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/ab34990))
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.2...v1.1.3) (2020-10-07)
 
