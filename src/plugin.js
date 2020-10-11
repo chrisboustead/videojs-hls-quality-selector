@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import {version as VERSION} from '../package.json';
+import { version as VERSION } from '../package.json';
 import ConcreteButton from './ConcreteButton';
 import ConcreteMenuItem from './ConcreteMenuItem';
 
@@ -61,7 +61,7 @@ class HlsQualitySelectorPlugin {
 
     const placementIndex = player.controlBar.children().length - 2;
     const concreteButtonInstance = player.controlBar.addChild(this._qualityButton,
-      {componentClass: 'qualitySelector'},
+      { componentClass: 'qualitySelector' },
       this.config.placementIndex || placementIndex);
 
     concreteButtonInstance.addClass('vjs-quality-selector');
@@ -113,9 +113,14 @@ class HlsQualitySelectorPlugin {
       if (!levelItems.filter(_existingItem => {
         return _existingItem.item && _existingItem.item.value === levels[i].height;
       }).length) {
+        const itemHeight = levels[i].height;
+        let label = itemHeight + 'p';
+        if (itemHeight === undefined) {
+          label = 'source';
+        }
         const levelItem = this.getQualityMenuItem.call(this, {
-          label: levels[i].height + 'p',
-          value: levels[i].height
+          label: label,
+          value: itemHeight
         });
 
         levelItems.push(levelItem);
@@ -142,7 +147,7 @@ class HlsQualitySelectorPlugin {
     }));
 
     if (this._qualityButton) {
-      this._qualityButton.createItems = function() {
+      this._qualityButton.createItems = function () {
         return levelItems;
       };
       this._qualityButton.update();
@@ -162,7 +167,11 @@ class HlsQualitySelectorPlugin {
     this._currentQuality = height;
 
     if (this.config.displayCurrentQuality) {
-      this.setButtonInnerText(height === 'auto' ? height : `${height}p`);
+      let label = `${height}p`
+      if (height === undefined) {
+        label = 'source';
+      }
+      this.setButtonInnerText(height === 'auto' ? height : label);
     }
 
     for (let i = 0; i < qualityList.length; ++i) {
@@ -215,7 +224,7 @@ const onPlayerReady = (player, options) => {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-const hlsQualitySelector = function(options) {
+const hlsQualitySelector = function (options) {
   this.ready(() => {
     onPlayerReady(this, videojs.mergeOptions(defaults, options));
   });
