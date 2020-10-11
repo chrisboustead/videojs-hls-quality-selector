@@ -115,11 +115,12 @@ class HlsQualitySelectorPlugin {
       }).length) {
         const itemHeight = levels[i].height;
         let label = itemHeight + 'p';
+
         if (itemHeight === undefined) {
           label = 'source';
         }
         const levelItem = this.getQualityMenuItem.call(this, {
-          label: label,
+          label,
           value: itemHeight
         });
 
@@ -147,7 +148,7 @@ class HlsQualitySelectorPlugin {
     }));
 
     if (this._qualityButton) {
-      this._qualityButton.createItems = function () {
+      this._qualityButton.createItems = function() {
         return levelItems;
       };
       this._qualityButton.update();
@@ -167,7 +168,8 @@ class HlsQualitySelectorPlugin {
     this._currentQuality = height;
 
     if (this.config.displayCurrentQuality) {
-      let label = `${height}p`
+      let label = `${height}p`;
+
       if (height === undefined) {
         label = 'source';
       }
@@ -224,7 +226,7 @@ const onPlayerReady = (player, options) => {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-const hlsQualitySelector = function (options) {
+const hlsQualitySelector = function(options) {
   this.ready(() => {
     onPlayerReady(this, videojs.mergeOptions(defaults, options));
   });
