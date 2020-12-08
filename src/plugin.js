@@ -48,7 +48,7 @@ class HlsQualitySelectorPlugin {
    */
   bindPlayerEvents() {
     this.player.qualityLevels().on('addqualitylevel', this.onAddQualityLevel.bind(this,
-      this.config.sortAscending));
+      this.config.sortAscending, this.config.autoPlacement));
   }
 
   /**
@@ -104,13 +104,20 @@ class HlsQualitySelectorPlugin {
    * Executed when a quality level is added from HLS playlist.
    *
    * @param {boolean} sortAscending - sort quality levels, default is ascending.
+   * @param {string} autoPlacement - place the 'auto' menu item at the 'top' or
+   * 'bottom' (default).
    */
-  onAddQualityLevel(sortAscending = true) {
+  onAddQualityLevel(sortAscending = true, autoPlacement = 'bottom') {
 
     const player = this.player;
     const qualityList = player.qualityLevels();
     const levels = qualityList.levels_ || [];
     const levelItems = [];
+    const autoMenuItem = this.getQualityMenuItem.call(this, {
+      label: player.localize('Auto'),
+      value: 'auto',
+      selected: true
+    });
 
     for (let i = 0; i < levels.length; ++i) {
       if (!levelItems.filter(_existingItem => {
@@ -125,6 +132,7 @@ class HlsQualitySelectorPlugin {
       }
     }
 
+    // sort the quality level values
     if (sortAscending) {
       levelItems.sort((current, next) => {
         if ((typeof current !== 'object') || (typeof next !== 'object')) {
@@ -141,15 +149,12 @@ class HlsQualitySelectorPlugin {
       });
     }
 
-    levelItems.push(this.getQualityMenuItem.call(this, {
-      label: player.localize('Auto'),
-      value: 'auto',
-      selected: true
-    }));
-
     if (this._qualityButton) {
       this._qualityButton.createItems = function() {
-        return levelItems;
+        // put 'auto' at the top or bottom per option parameter
+        return autoPlacement === 'top' ? [autoMenuItem, ...levelItems] :
+          [...levelItems, autoMenuItem];
+
       };
       this._qualityButton.update();
     }
@@ -206,7 +211,7 @@ class HlsQualitySelectorPlugin {
  */
 const onPlayerReady = (player, options) => {
   player.addClass('vjs-hls-quality-selector');
-  player.hlsQualitySelector = new HlsQualitySelectorPlugin(player, options);
+  player.hlsQualitySelectorCustom = new HlsQualitySelectorPlugin(player, options);
 };
 
 /**
@@ -221,16 +226,16 @@ const onPlayerReady = (player, options) => {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-const hlsQualitySelector = function(options) {
+const hlsQualitySelectorCustom = function(options) {
   this.ready(() => {
     onPlayerReady(this, videojs.mergeOptions(defaults, options));
   });
 };
 
 // Register the plugin with video.js.
-registerPlugin('hlsQualitySelector', hlsQualitySelector);
+registerPlugin('hlsQualitySelectorCustom', hlsQualitySelectorCustom);
 
 // Include the version number.
-hlsQualitySelector.VERSION = VERSION;
+hlsQualitySelectorCustom.VERSION = VERSION;
 
-export default hlsQualitySelector;
+export default hlsQualitySelectorCustom;
