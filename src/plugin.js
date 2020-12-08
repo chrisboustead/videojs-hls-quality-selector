@@ -211,7 +211,7 @@ class HlsQualitySelectorPlugin {
  */
 const onPlayerReady = (player, options) => {
   player.addClass('vjs-hls-quality-selector');
-  player.hlsQualitySelectorCustom = new HlsQualitySelectorPlugin(player, options);
+  player.hlsQualitySelector = new HlsQualitySelectorPlugin(player, options);
 };
 
 /**
@@ -226,16 +226,16 @@ const onPlayerReady = (player, options) => {
  * @param    {Object} [options={}]
  *           An object of options left to the plugin author to define.
  */
-const hlsQualitySelectorCustom = function(options) {
+const hlsQualitySelector = function(options) {
   this.ready(() => {
     onPlayerReady(this, videojs.mergeOptions(defaults, options));
   });
 };
 
 // Register the plugin with video.js.
-registerPlugin('hlsQualitySelectorCustom', hlsQualitySelectorCustom);
+registerPlugin('hlsQualitySelector', hlsQualitySelector);
 
 // Include the version number.
-hlsQualitySelectorCustom.VERSION = VERSION;
+hlsQualitySelector.VERSION = VERSION;
 
-export default hlsQualitySelectorCustom;
+export default hlsQualitySelector;
