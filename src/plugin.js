@@ -47,7 +47,8 @@ class HlsQualitySelectorPlugin {
    * Binds listener for quality level changes.
    */
   bindPlayerEvents() {
-    this.player.qualityLevels().on('addqualitylevel', this.onAddQualityLevel.bind(this));
+    this.player.qualityLevels().on('addqualitylevel', this.onAddQualityLevel.bind(this,
+      this.config.sortAscending));
   }
 
   /**
@@ -101,8 +102,10 @@ class HlsQualitySelectorPlugin {
 
   /**
    * Executed when a quality level is added from HLS playlist.
+   *
+   * @param {boolean} sortAscending - sort quality levels, default is ascending.
    */
-  onAddQualityLevel() {
+  onAddQualityLevel(sortAscending = true) {
 
     const player = this.player;
     const qualityList = player.qualityLevels();
@@ -122,18 +125,21 @@ class HlsQualitySelectorPlugin {
       }
     }
 
-    levelItems.sort((current, next) => {
-      if ((typeof current !== 'object') || (typeof next !== 'object')) {
-        return -1;
-      }
-      if (current.item.value < next.item.value) {
-        return -1;
-      }
-      if (current.item.value > next.item.value) {
-        return 1;
-      }
-      return 0;
-    });
+    if (sortAscending) {
+      levelItems.sort((current, next) => {
+        if ((typeof current !== 'object') || (typeof next !== 'object')) {
+          return -1;
+        }
+        return current.item.value - next.item.value;
+      });
+    } else {
+      levelItems.sort((current, next) => {
+        if ((typeof current !== 'object') || (typeof next !== 'object')) {
+          return -1;
+        }
+        return next.item.value - current.item.value;
+      });
+    }
 
     levelItems.push(this.getQualityMenuItem.call(this, {
       label: player.localize('Auto'),
