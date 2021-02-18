@@ -41,7 +41,7 @@ class HlsQualitySelectorPlugin {
     this.bindPlayerEvents();
 
     // Listen for source changes
-    this.player.on('loadedmetadata', (e) => {
+    this.player.on('loadedmetadata', () => {
       this.updatePlugin();
     });
   }
