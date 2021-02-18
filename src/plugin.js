@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import {version as VERSION} from '../package.json';
+import {version as VERSION} from './package.json';
 import ConcreteButton from './ConcreteButton';
 import ConcreteMenuItem from './ConcreteMenuItem';
 
@@ -8,7 +8,6 @@ const defaults = {};
 
 // Cross-compatibility for Video.js 5 and 6.
 const registerPlugin = videojs.registerPlugin || videojs.plugin;
-// const dom = videojs.dom || videojs;
 
 /**
  * VideoJS HLS Quality Selector Plugin class.
@@ -25,12 +24,36 @@ class HlsQualitySelectorPlugin {
     this.player = player;
     this.config = options;
 
-    // If there is quality levels plugin and the HLS tech exists
-    // then continue.
-    if (this.player.qualityLevels && this.getHls()) {
-      // Create the quality button.
-      this.createQualityButton();
-      this.bindPlayerEvents();
+    // Ensure dependencies are met
+    if (!this.player.qualityLevels) {
+      console.error(`Error: Missing video.js quality levels plugin (required) - videojs-hls-quality-selector`);
+      return;
+    }
+
+    this.setupPlugin();
+  }
+
+  setupPlugin() {
+    // Create the quality button.
+    this.createQualityButton();
+
+    // Bind event listeners
+    this.bindPlayerEvents();
+
+    // Listen for source changes
+    this.player.on('loadedmetadata', (e) => {
+      this.updatePlugin();
+    });
+  }
+
+  updatePlugin() {
+    // If there is the HLS tech
+    if (this.getHls()) {
+      // Show quality selector
+      this._qualityButton.show();
+    } else {
+      // Hide quality selector
+      this._qualityButton.hide();
     }
   }
 
@@ -54,7 +77,6 @@ class HlsQualitySelectorPlugin {
    * Adds the quality menu button to the player control bar.
    */
   createQualityButton() {
-
     const player = this.player;
 
     this._qualityButton = new ConcreteButton(player);
@@ -115,7 +137,7 @@ class HlsQualitySelectorPlugin {
       }).length) {
         const levelItem = this.getQualityMenuItem.call(this, {
           label: levels[i].height + 'p',
-          value: levels[i].height
+          value: levels[i].height,
         });
 
         levelItems.push(levelItem);
