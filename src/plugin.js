@@ -1,5 +1,5 @@
 import videojs from 'video.js';
-import {version as VERSION} from './package.json';
+import {version as VERSION} from '../package.json';
 import ConcreteButton from './ConcreteButton';
 import ConcreteMenuItem from './ConcreteMenuItem';
 
