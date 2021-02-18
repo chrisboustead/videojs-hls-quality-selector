@@ -30,7 +30,10 @@ export default class ConcreteButton extends VideoJsButtonClass {
      * @param {Player} player - videojs player instance
      */
   constructor(player) {
-    super(player, {title: player.localize('Quality')});
+    super(player, {
+      title: player.localize('Quality'),
+      name: 'QualityButton'
+    });
   }
 
     /**

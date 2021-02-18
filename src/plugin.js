@@ -62,12 +62,14 @@ class HlsQualitySelectorPlugin {
     const placementIndex = player.controlBar.children().length - 2;
     const concreteButtonInstance = player.controlBar.addChild(this._qualityButton,
       {componentClass: 'qualitySelector'},
-      placementIndex);
+      this.config.placementIndex || placementIndex);
 
     concreteButtonInstance.addClass('vjs-quality-selector');
     if (!this.config.displayCurrentQuality) {
+      const icon = ` ${this.config.vjsIconClass || 'vjs-icon-hd'}`;
+
       concreteButtonInstance
-        .menuButton_.$('.vjs-icon-placeholder').className += ' vjs-icon-hd';
+        .menuButton_.$('.vjs-icon-placeholder').className += icon;
     } else {
       this.setButtonInnerText('auto');
     }
@@ -156,6 +158,9 @@ class HlsQualitySelectorPlugin {
   setQuality(height) {
     const qualityList = this.player.qualityLevels();
 
+    // Set quality on plugin
+    this._currentQuality = height;
+
     if (this.config.displayCurrentQuality) {
       this.setButtonInnerText(height === 'auto' ? height : `${height}p`);
     }
@@ -166,6 +171,15 @@ class HlsQualitySelectorPlugin {
       quality.enabled = (quality.height === height || height === 'auto');
     }
     this._qualityButton.unpressButton();
+  }
+
+  /**
+   * Return the current set quality or 'auto'
+   *
+   * @return {string} the currently set quality
+   */
+  getCurrentQuality() {
+    return this._currentQuality || 'auto';
   }
 
 }

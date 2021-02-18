@@ -21,6 +21,22 @@ Does not yet support browsers using native HLS (Safari, Edge, etc).  To enable p
 
 Set to true to display the currently selected resolution in the menu button.  When not enabled, displayed an included VJS "HD" icon.
 
+**placementIndex** `integer`
+
+Set this to override the default positioning of the menu button in the control bar relative to the other components in the control bar.
+
+**vjsIconClass** `string` - _"vjs-icon-hd"_
+
+Set this to one of the custom VJS icons ([https://videojs.github.io/font/](https://videojs.github.io/font/)) to override the icon for the menu button. 
+
+
+## Methods
+
+**getCurrentQuality** `string` - _'auto'__
+
+Return the current set quality or 'auto'
+
+
 ## Screenshots
 
 Default setup - Menu selected:
@@ -60,6 +76,7 @@ This is the simplest case. Get the script in whatever way you prefer and include
 
 ```html
 <script src="//path/to/video.min.js"></script>
+<script src="//path/to/videojs-contrib-quality-levels.min.js"></script>
 <script src="//path/to/videojs-hls-quality-selector.min.js"></script>
 <script>
   var player = videojs('my-video');

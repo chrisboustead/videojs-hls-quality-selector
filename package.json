@@ -1,6 +1,6 @@
 {
   "name": "videojs-hls-quality-selector",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "description": "Adds a quality selector menu for HLS sources played in videojs.  Requires `videojs-contrib-hls` and videojs-contrib-quality-levels plugins.",
   "main": "dist/videojs-hls-quality-selector.cjs.js",
   "module": "dist/videojs-hls-quality-selector.es.js",
@@ -89,7 +89,7 @@
     "karma-qunit": "^1.2.1",
     "karma-safari-launcher": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.14.1",
     "node-static": "^0.7.9",
     "npm-run-all": "^4.0.2",
     "qunitjs": "^2.3.2",
