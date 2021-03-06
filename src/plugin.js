@@ -118,7 +118,10 @@ class HlsQualitySelectorPlugin {
           value: levels[i].height
         });
 
-        levelItems.push(levelItem);
+        // Check if the level is enabled
+        if (levels[i].enabled) {
+          levelItems.push(levelItem);
+        }
       }
     }
 
