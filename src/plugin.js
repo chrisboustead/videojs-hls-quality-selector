@@ -169,7 +169,14 @@ class HlsQualitySelectorPlugin {
       const quality = qualityList[i];
 
       quality.enabled = (quality.height === height || height === 'auto');
+    }    
+
+    // Reset other menu items selected status.
+    for (let i = 0; i < this._qualityButton.items.length; ++i) {
+      var menuItem = this._qualityButton.items[i];
+      menuItem.selected(menuItem && menuItem.item && menuItem.item.value === height)
     }
+
     this._qualityButton.unpressButton();
   }
 
