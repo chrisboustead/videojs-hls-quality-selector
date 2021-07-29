@@ -110,6 +110,9 @@ class HlsQualitySelectorPlugin {
     const levelItems = [];
 
     for (let i = 0; i < levels.length; ++i) {
+      if (!levels[i].height) {
+        continue;
+      }
       if (!levelItems.filter(_existingItem => {
         return _existingItem.item && _existingItem.item.value === levels[i].height;
       }).length) {
