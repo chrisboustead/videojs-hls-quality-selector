@@ -110,15 +110,19 @@ class HlsQualitySelectorPlugin {
     const levelItems = [];
 
     for (let i = 0; i < levels.length; ++i) {
-      if (!levels[i].height) {
+      const {width, height} = levels[i];
+      const pixels = width > height ? height : width;
+
+      if (!pixels) {
         continue;
       }
+
       if (!levelItems.filter(_existingItem => {
-        return _existingItem.item && _existingItem.item.value === levels[i].height;
+        return _existingItem.item && _existingItem.item.value === pixels;
       }).length) {
         const levelItem = this.getQualityMenuItem.call(this, {
-          label: levels[i].height + 'p',
-          value: levels[i].height
+          label: pixels + 'p',
+          value: pixels
         });
 
         levelItems.push(levelItem);
@@ -154,24 +158,25 @@ class HlsQualitySelectorPlugin {
   }
 
   /**
-   * Sets quality (based on media height)
+   * Sets quality (based on media short side)
    *
-   * @param {number} height - A number representing HLS playlist.
+   * @param {number} quality - A number representing HLS playlist.
    */
-  setQuality(height) {
+  setQuality(quality) {
     const qualityList = this.player.qualityLevels();
 
     // Set quality on plugin
-    this._currentQuality = height;
+    this._currentQuality = quality;
 
     if (this.config.displayCurrentQuality) {
-      this.setButtonInnerText(height === 'auto' ? height : `${height}p`);
+      this.setButtonInnerText(quality === 'auto' ? quality : `${quality}p`);
     }
 
     for (let i = 0; i < qualityList.length; ++i) {
-      const quality = qualityList[i];
+      const {width, height} = qualityList[i];
+      const pixels = width > height ? height : width;
 
-      quality.enabled = (quality.height === height || height === 'auto');
+      qualityList[i].enabled = (pixels === quality || quality === 'auto');
     }
     this._qualityButton.unpressButton();
   }
