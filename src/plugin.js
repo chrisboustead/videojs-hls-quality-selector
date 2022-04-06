@@ -4,7 +4,10 @@ import ConcreteButton from './ConcreteButton';
 import ConcreteMenuItem from './ConcreteMenuItem';
 
 // Default options for the plugin.
-const defaults = {};
+const defaults = {
+  sortAscending: false,
+  autoPlacement: 'top'
+};
 
 // Cross-compatibility for Video.js 5 and 6.
 const registerPlugin = videojs.registerPlugin || videojs.plugin;
@@ -47,8 +50,7 @@ class HlsQualitySelectorPlugin {
    * Binds listener for quality level changes.
    */
   bindPlayerEvents() {
-    this.player.qualityLevels().on('addqualitylevel', this.onAddQualityLevel.bind(this,
-      this.config.sortAscending, this.config.autoPlacement));
+    this.player.qualityLevels().on('addqualitylevel', this.onAddQualityLevel.bind(this));
   }
 
   /**
@@ -102,17 +104,13 @@ class HlsQualitySelectorPlugin {
 
   /**
    * Executed when a quality level is added from HLS playlist.
-   *
-   * @param {boolean} sortAscending - sort quality levels, default is ascending.
-   * @param {string} autoPlacement - place the 'auto' menu item at the 'top' or
-   * 'bottom' (default).
    */
-  onAddQualityLevel(sortAscending = true, autoPlacement = 'bottom') {
-
+  onAddQualityLevel() {
     const player = this.player;
     const qualityList = player.qualityLevels();
     const levels = qualityList.levels_ || [];
     const levelItems = [];
+    const autoPlacement = this.config.autoPlacement;
     const autoMenuItem = this.getQualityMenuItem.call(this, {
       label: player.localize('Auto'),
       value: 'auto',
@@ -133,7 +131,7 @@ class HlsQualitySelectorPlugin {
     }
 
     // sort the quality level values
-    if (sortAscending) {
+    if (this.config.sortAscending) {
       levelItems.sort((current, next) => {
         if ((typeof current !== 'object') || (typeof next !== 'object')) {
           return -1;
