@@ -178,6 +178,16 @@ class HlsQualitySelectorPlugin {
 
       qualityList[i].enabled = (pixels === quality || quality === 'auto');
     }
+
+    // Reset other menu items selected status.
+    for (let i = 0; i < this._qualityButton.items.length; ++i) {
+      const menuItem = this._qualityButton.items[i];
+
+      if (menuItem) {
+        menuItem.selected(menuItem.item && menuItem.item.value === height);
+      }
+    }
+
     this._qualityButton.unpressButton();
   }
 
