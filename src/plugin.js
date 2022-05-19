@@ -40,7 +40,7 @@ class HlsQualitySelectorPlugin {
    * @return {*} - videojs-hls-contrib plugin.
    */
   getHls() {
-    return this.player.tech({ IWillNotUseThisInPlugins: true }).hls;
+    return this.player.tech({ IWillNotUseThisInPlugins: true }).vhs;
   }
 
   /**
