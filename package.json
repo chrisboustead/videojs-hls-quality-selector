@@ -1,6 +1,6 @@
 {
   "name": "videojs-hls-quality-selector",
-  "version": "1.1.4",
+  "version": "1.1.6",
   "description": "Adds a quality selector menu for HLS sources played in videojs.  Requires `videojs-contrib-hls` and videojs-contrib-quality-levels plugins.",
   "main": "dist/videojs-hls-quality-selector.cjs.js",
   "module": "dist/videojs-hls-quality-selector.es.js",
