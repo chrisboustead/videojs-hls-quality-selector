@@ -178,7 +178,10 @@ class HlsQualitySelectorPlugin {
 
       qualityList[i].enabled = (pixels === quality || quality === 'auto');
     }
-    this._qualityButton.unpressButton();
+
+    if (this._qualityButton) {
+      this._qualityButton.unpressButton();
+    }
   }
 
   /**
