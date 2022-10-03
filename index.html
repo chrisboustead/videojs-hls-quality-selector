@@ -3,8 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title>videojs-hls-quality-selector Demo</title>
-  <link href="node_modules/video.js/dist/video-js.css" rel="stylesheet">
-  <link href="dist/videojs-hls-quality-selector.css" rel="stylesheet">
+  <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+
+ <style>
+/**
+ * videojs-hls-quality-selector
+ * @version 1.0.5
+ * @copyright 2019 Chris Boustead (chris@forgemotion.com)
+ * @license MIT
+ */
+.video-js.vjs-hls-quality-selector{display:block}
+</style>
 </head>
 <body>
   <video id="videojs-hls-quality-selector-player" class="video-js vjs-default-skin" width="640" height="360" controls>
@@ -15,9 +24,11 @@
     <li><a href="docs/api/">Read generated docs.</a></li>
   </ul>
 
-  <script src="node_modules/video.js/dist/video.js"></script>
-  <script src="node_modules/videojs-contrib-quality-levels/dist/videojs-contrib-quality-levels.js"></script>
-  <script src="dist/videojs-hls-quality-selector.js"></script>
+  <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-quality-levels/2.2.0/videojs-contrib-quality-levels.js"  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ 
+  <script src="https://www.unpkg.com/videojs-hls-quality-selector@1.0.5/dist/videojs-hls-quality-selector.js"></script>
   <script>
     (function(window, videojs) {
       var player = window.player = videojs('videojs-hls-quality-selector-player');
