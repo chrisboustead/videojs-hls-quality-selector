@@ -49,7 +49,7 @@ QUnit.test('registers itself with video.js', function(assert) {
   this.player.hlsQualitySelector();
 
   // Tick the clock forward enough to trigger the player to be "ready".
-  this.clock.tick(2);
+  this.clock.tick(1);
 
   assert.ok(
     this.player.hasClass('vjs-hls-quality-selector'),
