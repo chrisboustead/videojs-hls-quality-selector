@@ -1,3 +1,21 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.2.0...v1.3.0) (2024-03-13)
+
+### Features
+
+* **gha:** publish action ([cd8e58a](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/cd8e58a))
+
+### Bug Fixes
+
+* **package:** update to node 18 ([631e973](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/631e973))
+
+### Chores
+
+* merge conflict ([0b1efc9](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/0b1efc9))
+* merge conflict ([b067cba](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/b067cba))
+* merge conflict ([20cfee8](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/20cfee8))
+* **package:** npm update ([ee92237](https://github.com/chrisboustead/videojs-hls-quality-selector/commit/ee92237))
+
 ### Chores
 
 <a name="1.2.0"></a>
