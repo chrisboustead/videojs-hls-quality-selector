@@ -32,7 +32,7 @@ class HlsQualitySelector extends Plugin {
     // the parent class will add player under this.player
     super(player);
 
-    this.options = videojs.mergeOptions(defaults, options);
+    this.options = videojs.obj.merge(defaults, options);
 
     this.player.ready(() => {
       // If there is quality levels plugin and the HLS tech exists then continue.
@@ -107,7 +107,6 @@ class HlsQualitySelector extends Plugin {
    * Executed when a quality level is added from HLS playlist.
    */
   onAddQualityLevel() {
-
     const player = this.player;
     const qualityList = player.qualityLevels();
     const levels = qualityList.levels_ || [];
