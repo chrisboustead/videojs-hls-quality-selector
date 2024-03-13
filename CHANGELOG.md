@@ -1,3 +1,6 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.3.0...v2.0.0) (2024-03-13)
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.2.0...v1.3.0) (2024-03-13)
 
