@@ -1,46 +1,48 @@
 import videojs from 'video.js';
-import {version as VERSION} from '../package.json';
+import { version as VERSION } from '../package.json';
 import ConcreteButton from './ConcreteButton';
 import ConcreteMenuItem from './ConcreteMenuItem';
+
+const Plugin = videojs.getPlugin('plugin');
 
 // Default options for the plugin.
 const defaults = {};
 
-// Cross-compatibility for Video.js 5 and 6.
-const registerPlugin = videojs.registerPlugin || videojs.plugin;
-// const dom = videojs.dom || videojs;
-
 /**
- * VideoJS HLS Quality Selector Plugin class.
+ * An advanced Video.js plugin. For more information on the API
+ *
+ * See: https://blog.videojs.com/feature-spotlight-advanced-plugins/
  */
-class HlsQualitySelectorPlugin {
+class HlsQualitySelector extends Plugin {
 
   /**
-   * Plugin Constructor.
+   * Create a HlsQualitySelector plugin instance.
    *
-   * @param {Player} player - The videojs player instance.
-   * @param {Object} options - The plugin options.
+   * @param  {Player} player
+   *         A Video.js Player instance.
+   *
+   * @param  {Object} [options]
+   *         An optional options object.
+   *
+   *         While not a core part of the Video.js plugin architecture, a
+   *         second argument of options is a convenient way to accept inputs
+   *         from your plugin's caller.
    */
   constructor(player, options) {
-    this.player = player;
-    this.config = options;
+    // the parent class will add player under this.player
+    super(player);
 
-    // If there is quality levels plugin and the HLS tech exists
-    // then continue.
-    if (this.player.qualityLevels && this.getHls()) {
-      // Create the quality button.
-      this.createQualityButton();
-      this.bindPlayerEvents();
-    }
-  }
+    this.options = videojs.mergeOptions(defaults, options);
 
-  /**
-   * Returns HLS Plugin
-   *
-   * @return {*} - videojs-hls-contrib plugin.
-   */
-  getHls() {
-    return this.player.tech({ IWillNotUseThisInPlugins: true }).hls;
+    this.player.ready(() => {
+      // If there is quality levels plugin and the HLS tech exists then continue.
+      if (this.player.qualityLevels) {
+        this.player.addClass('vjs-hls-quality-selector');
+        // Create the quality button.
+        this.createQualityButton();
+        this.bindPlayerEvents();
+      }
+    });
   }
 
   /**
@@ -60,18 +62,20 @@ class HlsQualitySelectorPlugin {
     this._qualityButton = new ConcreteButton(player);
 
     const placementIndex = player.controlBar.children().length - 2;
-    const concreteButtonInstance = player.controlBar.addChild(this._qualityButton,
-      {componentClass: 'qualitySelector'},
-      this.config.placementIndex || placementIndex);
+    const concreteButtonInstance = player.controlBar.addChild(
+      this._qualityButton,
+      { componentClass: 'qualitySelector' },
+      this.options.placementIndex || placementIndex
+    );
 
     concreteButtonInstance.addClass('vjs-quality-selector');
-    if (!this.config.displayCurrentQuality) {
-      const icon = ` ${this.config.vjsIconClass || 'vjs-icon-hd'}`;
+    if (!this.options.displayCurrentQuality) {
+      const icon = ` ${this.options.vjsIconClass || 'vjs-icon-hd'}`;
 
       concreteButtonInstance
         .menuButton_.$('.vjs-icon-placeholder').className += icon;
     } else {
-      this.setButtonInnerText('auto');
+      this.setButtonInnerText(player.localize('Auto'));
     }
     concreteButtonInstance.removeClass('vjs-hidden');
 
@@ -110,7 +114,7 @@ class HlsQualitySelectorPlugin {
     const levelItems = [];
 
     for (let i = 0; i < levels.length; ++i) {
-      const {width, height} = levels[i];
+      const { width, height } = levels[i];
       const pixels = width > height ? height : width;
 
       if (!pixels) {
@@ -143,13 +147,13 @@ class HlsQualitySelectorPlugin {
     });
 
     levelItems.push(this.getQualityMenuItem.call(this, {
-      label: player.localize('Auto'),
+      label: this.player.localize('Auto'),
       value: 'auto',
       selected: true
     }));
 
     if (this._qualityButton) {
-      this._qualityButton.createItems = function() {
+      this._qualityButton.createItems = () => {
         return levelItems;
       };
       this._qualityButton.update();
@@ -168,12 +172,12 @@ class HlsQualitySelectorPlugin {
     // Set quality on plugin
     this._currentQuality = quality;
 
-    if (this.config.displayCurrentQuality) {
-      this.setButtonInnerText(quality === 'auto' ? quality : `${quality}p`);
+    if (this.options.displayCurrentQuality) {
+      this.setButtonInnerText(quality === 'auto' ? this.player.localize('Auto') : `${quality}p`);
     }
 
     for (let i = 0; i < qualityList.length; ++i) {
-      const {width, height} = qualityList[i];
+      const { width, height } = qualityList[i];
       const pixels = width > height ? height : width;
 
       qualityList[i].enabled = (pixels === quality || quality === 'auto');
@@ -192,47 +196,10 @@ class HlsQualitySelectorPlugin {
 
 }
 
-/**
- * Function to invoke when the player is ready.
- *
- * This is a great place for your plugin to initialize itself. When this
- * function is called, the player will have its DOM and child components
- * in place.
- *
- * @function onPlayerReady
- * @param    {Player} player
- *           A Video.js player object.
- *
- * @param    {Object} [options={}]
- *           A plain object containing options for the plugin.
- */
-const onPlayerReady = (player, options) => {
-  player.addClass('vjs-hls-quality-selector');
-  player.hlsQualitySelector = new HlsQualitySelectorPlugin(player, options);
-};
-
-/**
- * A video.js plugin.
- *
- * In the plugin function, the value of `this` is a video.js `Player`
- * instance. You cannot rely on the player being in a "ready" state here,
- * depending on how the plugin is invoked. This may or may not be important
- * to you; if not, remove the wait for "ready"!
- *
- * @function hlsQualitySelector
- * @param    {Object} [options={}]
- *           An object of options left to the plugin author to define.
- */
-const hlsQualitySelector = function(options) {
-  this.ready(() => {
-    onPlayerReady(this, videojs.mergeOptions(defaults, options));
-  });
-};
+// Include the version number.
+HlsQualitySelector.VERSION = VERSION;
 
 // Register the plugin with video.js.
-registerPlugin('hlsQualitySelector', hlsQualitySelector);
+videojs.registerPlugin('hlsQualitySelector', HlsQualitySelector);
 
-// Include the version number.
-hlsQualitySelector.VERSION = VERSION;
-
-export default hlsQualitySelector;
+export default HlsQualitySelector;

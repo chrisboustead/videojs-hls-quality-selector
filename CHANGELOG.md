@@ -1,3 +1,9 @@
+### Chores
+
+<a name="1.2.0"></a>
+## Upgrade template generator for 8.0 compatibility [1.2.0](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.4...v1.2.0) (2023-12-29)
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/chrisboustead/videojs-hls-quality-selector/compare/v1.1.3...v1.1.4) (2020-10-07)
 

@@ -2,12 +2,13 @@
 [![CircleCI](https://circleci.com/gh/chrisboustead/videojs-hls-quality-selector/tree/master.svg?style=svg)](https://circleci.com/gh/chrisboustead/videojs-hls-quality-selector/tree/master)
 [![npm version](https://badge.fury.io/js/videojs-hls-quality-selector.svg)](https://badge.fury.io/js/videojs-hls-quality-selector)
 
-**Note:** v1.x.x is Only compatible with VideoJS 7.x due to the move from `videojs-contrib-hls` to `videojs/http-streaming`.  For VideoJS v5 or v6 support please use a `v0.x.x` tag.
+**Note:** 
+- v1.2.0 is compatible with videojs 8
+- v1.x.x is Only compatible with VideoJS 7.x due to the move from `videojs-contrib-hls` to `videojs/http-streaming`.  For VideoJS v5 or v6 support please use a `v0.x.x` tag
 
 ## Description
 
-Adds a quality selector menu for HLS sources played in videojs.  
-Requires `videojs-contrib-quality-levels` plugins.
+Adds a quality selector menu for HLS sources played in videojs.
 
 Any HLS manifest with multiple playlists/renditions should be selectable from within the added control.  
 
@@ -48,18 +49,8 @@ Display Current Quality option enabled:
 
 ## Table of Contents
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Installation
-
-- [Installation](#installation)
-- [Usage](#usage)
-  - [`<script>` Tag](#script-tag)
-  - [Browserify/CommonJS](#browserifycommonjs)
-  - [RequireJS/AMD](#requirejsamd)
-- [License](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- START doctoc -->
+<!-- END doctoc -->
 ## Installation
 
 ```sh
@@ -76,7 +67,6 @@ This is the simplest case. Get the script in whatever way you prefer and include
 
 ```html
 <script src="//path/to/video.min.js"></script>
-<script src="//path/to/videojs-contrib-quality-levels.min.js"></script>
 <script src="//path/to/videojs-hls-quality-selector.min.js"></script>
 <script>
   var player = videojs('my-video');
@@ -112,9 +102,7 @@ When using with RequireJS (or another AMD library), get the script in whatever w
 require(['video.js', 'videojs-hls-quality-selector'], function(videojs) {
   var player = videojs('my-video');
 
-  player.hlsQualitySelector({
-       displayCurrentQuality: true,
-    });
+  player.hlsQualitySelector();
 });
 ```
 
